@@ -43,4 +43,345 @@
         </div>
 
     </div>
+    
+    {{!-- Terminal theme dynamic styling script --}}
+    <script>
+    (function () {
+      const FONT_NAME = 'Departure Mono';
+      const FONT_STACK = '"Departure Mono", monospace';
+      const FONT_URL = '{{asset "fonts/DepartureMono-Regular.woff2"}}';
+      const GREEN = '#00ff66';
+      const GREEN_DIM = '#00cc55';
+      const BLACK = '#000000';
+
+      function injectFontFace(root) {
+        if (!root) return;
+
+        const doc = root.ownerDocument || root;
+        const target =
+          root.head ||
+          doc.head ||
+          root.querySelector?.('head') ||
+          doc.querySelector?.('head');
+
+        if (!target) return;
+
+        if (target.querySelector('#departure-mono-force-font')) return;
+
+        const style = doc.createElement('style');
+        style.id = 'departure-mono-force-font';
+        style.textContent = `
+          @font-face {
+            font-family: "${FONT_NAME}";
+            src: url("${FONT_URL}") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+          }
+
+          /* Maximum specificity overrides */
+          html body * {
+            font-family: ${FONT_STACK} !important;
+          }
+          
+          /* Ultra-specific Ghost comment overrides */
+          div.mb-7.flex.w-full.items-baseline.justify-between.font-sans,
+          div.mb-7.flex.w-full.items-baseline.justify-between.font-sans *,
+          h2.text-\\[2\\.2rem\\].font-bold.tracking-tight.text-neutral-900.sm\\:text-2xl.dark\\:text-white,
+          h2.text-\\[2\\.2rem\\].font-bold.tracking-tight.text-neutral-900.sm\\:text-2xl.dark\\:text-white *,
+          div.text-md.text-neutral-900\\/50.sm\\:text-lg.dark\\:text-white\\/50,
+          div.text-md.text-neutral-900\\/50.sm\\:text-lg.dark\\:text-white\\/50 *,
+          h1.mb-\\[8px\\].text-center.font-sans.text-2xl.tracking-tight.text-black.dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.85\\)\\].font-semibold,
+          h1.mb-\\[8px\\].text-center.font-sans.text-2xl.tracking-tight.text-black.dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.85\\)\\].font-semibold *,
+          p.mb-\\[28px\\].w-full.px-0.text-center.font-sans.text-lg.leading-normal.text-neutral-600.sm\\:max-w-screen-sm.sm\\:px-8.dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.85\\)\\],
+          p.mb-\\[28px\\].w-full.px-0.text-center.font-sans.text-lg.leading-normal.text-neutral-600.sm\\:max-w-screen-sm.sm\\:px-8.dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.85\\)\\] *,
+          button.text-md.mb-\\[12px\\].inline-block.rounded.px-5.py-\\[14px\\].font-sans.font-medium.leading-none.text-white.transition-all.hover\\:opacity-90,
+          button.text-md.mb-\\[12px\\].inline-block.rounded.px-5.py-\\[14px\\].font-sans.font-medium.leading-none.text-white.transition-all.hover\\:opacity-90 *,
+          p.text-md.text-center.font-sans.text-\\[rgba\\(0\\,0\\,0\\,0\\.4\\)\\].dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.5\\)\\],
+          p.text-md.text-center.font-sans.text-\\[rgba\\(0\\,0\\,0\\,0\\.4\\)\\].dark\\:text-\\[rgba\\(255\\,255\\,255\\,0\\.5\\)\\] *,
+          button.rounded-md.text-sm.font-semibold.transition-all.hover\\:opacity-90,
+          button.rounded-md.text-sm.font-semibold.transition-all.hover\\:opacity-90 * {
+            font-family: ${FONT_STACK} !important;
+          }
+
+          /* Generic high-specificity overrides */
+          [data-testid] *,
+          [data-testid="title"] *,
+          [data-testid="count"] *,
+          [data-testid="cta-box"] *,
+          [data-testid="signup-button"] *,
+          [data-testid="signin-button"] *,
+          [data-testid="comment-elements"] *,
+          .ghost-display *,
+          .font-sans,
+          .font-serif,
+          .font-mono,
+          .text-2xl,
+          .text-lg,
+          .text-md,
+          .text-sm,
+          .font-bold,
+          .font-medium,
+          .font-semibold,
+          .tracking-tight,
+          .leading-none,
+          .leading-normal,
+          [class*="text-"],
+          [class*="font-"],
+          [class*="tracking-"],
+          [class*="leading-"] {
+            font-family: ${FONT_STACK} !important;
+          }
+          
+          /* CSS Custom Property override */
+          :root {
+            --font-family-sans: ${FONT_STACK};
+            --font-family-serif: ${FONT_STACK};
+            --font-family-mono: ${FONT_STACK};
+            --tw-font-family-sans: ${FONT_STACK};
+            --tw-font-family-serif: ${FONT_STACK};
+            --tw-font-family-mono: ${FONT_STACK};
+          }
+        `;
+
+        target.appendChild(style);
+      }
+
+      function applyToElement(el, dim = false) {
+        if (!el || !el.style) return;
+
+        // Force font family override with multiple methods
+        el.style.setProperty('font-family', FONT_STACK, 'important');
+        el.style.fontFamily = FONT_STACK;
+        if (el.style.cssText) {
+          el.style.cssText = el.style.cssText.replace(/font-family:[^;]*;?/gi, '') + `font-family: ${FONT_STACK} !important;`;
+        }
+        
+        el.style.setProperty('font-variant-ligatures', 'none', 'important');
+        el.style.setProperty('color', dim ? GREEN_DIM : GREEN, 'important');
+        el.style.setProperty('background', BLACK, 'important');
+        el.style.setProperty('background-color', BLACK, 'important');
+        el.style.setProperty('background-image', 'none', 'important');
+        
+        // Remove any font classes that might be interfering
+        if (el.classList) {
+          const fontClasses = ['font-sans', 'font-serif'];
+          fontClasses.forEach(cls => {
+            if (el.classList.contains(cls)) {
+              el.classList.remove(cls);
+            }
+          });
+          // Force add our font class
+          el.classList.add('font-mono');
+        }
+        
+        // Nuclear option: directly manipulate computed styles
+        try {
+          if (el.style && el.style.setProperty) {
+            // Remove any existing font-family declarations
+            el.style.removeProperty('font-family');
+            // Force set with maximum priority
+            el.style.cssText += `; font-family: ${FONT_STACK} !important;`;
+          }
+          
+          // Ultimate override: Set style attribute directly
+          const currentStyle = el.getAttribute('style') || '';
+          const fontFamilyRegex = /font-family:[^;]*;?/gi;
+          const cleanedStyle = currentStyle.replace(fontFamilyRegex, '');
+          el.setAttribute('style', `${cleanedStyle}; font-family: ${FONT_STACK} !important;`);
+          
+        } catch (e) {
+          // Silent fail if property manipulation fails
+        }
+      }
+
+      function styleDocument(doc) {
+        if (!doc) return;
+
+        injectFontFace(doc);
+
+        const selectors = [
+          'html',
+          'body',
+          'body *',
+          '.ghost-display',
+          '.ghost-display *',
+          '[data-testid]',
+          '[data-testid] *',
+          '[data-testid="content-box"]',
+          '[data-testid="content-box"] *',
+          '[data-testid="title"]',
+          '[data-testid="title"] *',
+          '[data-testid="count"]',
+          '[data-testid="count"] *',
+          '[data-testid="cta-box"]',
+          '[data-testid="cta-box"] *',
+          '[data-testid="signup-button"]',
+          '[data-testid="signup-button"] *',
+          '[data-testid="signin-button"]',
+          '[data-testid="signin-button"] *',
+          '.font-sans',
+          '.font-sans *',
+          '.font-bold',
+          '.font-bold *',
+          '.font-semibold',
+          '.font-semibold *',
+          '.font-medium',
+          '.font-medium *',
+          '[class*="font-"]',
+          '[class*="text-"]'
+        ];
+
+        selectors.forEach(selector => {
+          doc.querySelectorAll(selector).forEach(el => {
+            applyToElement(el);
+          });
+        });
+
+        doc.querySelectorAll('[data-testid="count"], [data-testid="count"] *').forEach(el => {
+          applyToElement(el, true);
+        });
+
+        doc.querySelectorAll('[data-testid="signup-button"], [data-testid="signin-button"], button').forEach(el => {
+          applyToElement(el);
+          el.style.setProperty('border', '1px solid ' + GREEN, 'important');
+          el.style.setProperty('box-shadow', 'none', 'important');
+        });
+      }
+
+      function styleShadowRoot(shadowRoot) {
+        if (!shadowRoot) return;
+
+        injectFontFace(shadowRoot);
+
+        shadowRoot.querySelectorAll('*').forEach(el => {
+          applyToElement(el);
+        });
+      }
+
+      function styleAll() {
+        styleDocument(document);
+
+        document.querySelectorAll('*').forEach(el => {
+          if (el.shadowRoot) {
+            styleShadowRoot(el.shadowRoot);
+          }
+        });
+
+        document.querySelectorAll('iframe').forEach(iframe => {
+          try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            styleDocument(iframeDoc);
+            
+            // Also try to inject styles directly into iframe head
+            const iframeHead = iframeDoc.querySelector('head');
+            if (iframeHead && !iframeHead.querySelector('#departure-mono-force-font-iframe')) {
+              const iframeStyle = iframeDoc.createElement('style');
+              iframeStyle.id = 'departure-mono-force-font-iframe';
+              iframeStyle.textContent = \`
+                * { font-family: ${FONT_STACK} !important; }
+                .font-sans, .font-serif, .font-mono, 
+                [class*="font-"], [class*="text-"] { font-family: ${FONT_STACK} !important; }
+              \`;
+              iframeHead.appendChild(iframeStyle);
+            }
+            
+            // Force-style all iframe elements immediately
+            iframeDoc.querySelectorAll('*').forEach(el => {
+              if (el.style) {
+                el.style.setProperty('font-family', FONT_STACK, 'important');
+                el.setAttribute('style', (el.getAttribute('style') || '').replace(/font-family:[^;]*;?/gi, '') + \`; font-family: ${FONT_STACK} !important;\`);
+              }
+            });
+            
+          } catch (e) {
+            console.warn('Could not style iframe font, likely cross-origin:', iframe);
+            
+            // Try alternative approach for cross-origin iframes
+            iframe.addEventListener('load', () => {
+              try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (iframeDoc) {
+                  styleDocument(iframeDoc);
+                }
+              } catch (e2) {
+                // Still cross-origin, can't do much
+              }
+            });
+          }
+        });
+      }
+
+      styleAll();
+
+      // Aggressive mutation observer for dynamic content
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                // Immediately style new elements without waiting
+                applyToElement(node);
+                
+                // Style all children immediately
+                if (node.querySelectorAll) {
+                  node.querySelectorAll('*').forEach(child => {
+                    applyToElement(child);
+                  });
+                }
+                
+                // Check if it's an iframe and style its contents
+                if (node.tagName === 'IFRAME') {
+                  setTimeout(() => {
+                    try {
+                      const iframeDoc = node.contentDocument || node.contentWindow.document;
+                      if (iframeDoc) {
+                        styleDocument(iframeDoc);
+                      }
+                    } catch (e) {
+                      // Cross-origin iframe
+                    }
+                  }, 100);
+                }
+              }
+            });
+          }
+          
+          // Also handle attribute changes (style, class)
+          if (mutation.type === 'attributes' && 
+              (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+            applyToElement(mutation.target);
+          }
+        });
+        
+        // Always run a full style pass after mutations
+        setTimeout(styleAll, 10);
+      });
+
+      // Observe the entire document for changes
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+
+      // Also run periodically as a fallback - much more frequently
+      setInterval(styleAll, 250); // Every 250ms
+      
+      // Run on scroll in case elements become visible
+      document.addEventListener('scroll', styleAll);
+      window.addEventListener('scroll', styleAll);
+      
+      // Run on any click in case it triggers content loading
+      document.addEventListener('click', () => setTimeout(styleAll, 50));
+      
+      // Run when page becomes visible again
+      document.addEventListener('visibilitychange', styleAll);
+      
+      // Nuclear option: constantly enforce on focus/blur
+      window.addEventListener('focus', styleAll);
+      window.addEventListener('blur', styleAll);
+    })();
+    </script>
 </footer>

@@ -3383,3 +3383,512 @@ body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-hea
 .gh-button-share:hover {
     border-color: rgba(0, 0, 0, 0.5);
 }
+
+/* Terminal Theme Override CSS
+/* ------------------------------------------------------------
+
+Custom terminal-style theme with Departure Mono font and green on black color scheme.
+This file contains the code injection styles for the terminal theme.
+
+*/
+
+@font-face {
+  font-family: "Departure Mono";
+  src: url("../fonts/DepartureMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --terminal-green: #00ff66;
+  --terminal-green-dim: #00cc55;
+  --terminal-bg: #000000;
+}
+
+/* Nuclear black background override */
+html,
+body,
+body *,
+body *::before,
+body *::after,
+.site,
+.site *,
+.gh-site,
+.gh-site *,
+.gh-viewport,
+.gh-viewport *,
+.gh-main,
+.gh-main *,
+.gh-outer,
+.gh-outer *,
+.gh-inner,
+.gh-inner *,
+.gh-canvas,
+.gh-canvas *,
+.gh-head,
+.gh-head *,
+.gh-navigation,
+.gh-navigation *,
+.gh-footer,
+.gh-footer *,
+.gh-footer-inner,
+.gh-footer-inner *,
+.gh-card,
+.gh-card *,
+.post-card,
+.post-card *,
+.article,
+.article *,
+.article-header,
+.article-header *,
+.article-content,
+.article-content *,
+.kg-card,
+.kg-card *,
+.kg-width-wide,
+.kg-width-wide *,
+.kg-width-full,
+.kg-width-full *,
+.ghost-display,
+.ghost-display *,
+[data-testid="content-box"],
+[data-testid="content-box"] *,
+[data-testid="cta-box"],
+[data-testid="cta-box"] *,
+section,
+article,
+main,
+header,
+footer,
+nav,
+div,
+aside,
+button,
+input,
+textarea,
+select {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Global font/color */
+html,
+body,
+body *,
+button,
+input,
+textarea,
+select {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Links */
+a,
+a *,
+a:visited,
+a:hover,
+a:active {
+  color: var(--terminal-green) !important;
+}
+
+/* Main Ghost navigation logo / site title */
+.gh-navigation-logo,
+.gh-navigation-logo *,
+.gh-navigation-logo.is-title,
+a.gh-navigation-logo.is-title {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Footer logo / footer nav */
+.gh-footer-logo,
+.gh-footer-logo *,
+.gh-footer-logo.is-title,
+span.gh-footer-logo.is-title,
+.gh-footer-menu,
+.gh-footer-menu *,
+.gh-footer-menu .nav,
+.gh-footer-menu .nav *,
+.gh-footer-menu a {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Normal headings and titles */
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
+.site-title,
+.site-title *,
+.site-description,
+.site-description *,
+.gh-site-title,
+.gh-site-title *,
+.gh-site-description,
+.gh-site-description *,
+.gh-head-logo,
+.gh-head-logo *,
+.gh-head-menu,
+.gh-head-menu *,
+.gh-head-actions,
+.gh-head-actions *,
+.gh-header,
+.gh-header *,
+.gh-article-title,
+.gh-article-title *,
+.gh-article-excerpt,
+.gh-article-excerpt *,
+.gh-card-title,
+.gh-card-title *,
+.post-card-title,
+.post-card-title *,
+.article-title,
+.article-title *,
+.article-header,
+.article-header *,
+.post-title,
+.post-title *,
+.page-title,
+.page-title *,
+.author-name,
+.author-name *,
+.tag-name,
+.tag-name *,
+.kg-header-card-heading,
+.kg-header-card-heading *,
+.kg-header-card-subheading,
+.kg-header-card-subheading * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Ghost comments / member discussion block */
+.ghost-display,
+.ghost-display *,
+.ghost-display .font-sans,
+.ghost-display .font-semibold,
+.ghost-display .font-bold,
+.ghost-display .font-medium,
+.ghost-display [data-testid="title"],
+.ghost-display [data-testid="title"] *,
+.ghost-display [data-testid="count"],
+.ghost-display [data-testid="count"] *,
+.ghost-display [data-testid="cta-box"],
+.ghost-display [data-testid="cta-box"] *,
+.ghost-display [data-testid="signup-button"],
+.ghost-display [data-testid="signup-button"] *,
+.ghost-display [data-testid="signin-button"],
+.ghost-display [data-testid="signin-button"] *,
+.ghost-display [data-testid="comment-elements"],
+.ghost-display [data-testid="comment-elements"] * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Direct Ghost comments/member widget override */
+[data-testid="content-box"],
+[data-testid="content-box"] *,
+[data-testid="title"],
+[data-testid="title"] *,
+[data-testid="count"],
+[data-testid="count"] *,
+[data-testid="cta-box"],
+[data-testid="cta-box"] *,
+[data-testid="signup-button"],
+[data-testid="signup-button"] *,
+[data-testid="signin-button"],
+[data-testid="signin-button"] *,
+[data-testid="comment-elements"],
+[data-testid="comment-elements"] * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Override Tailwind font utility classes */
+.font-sans,
+.font-sans *,
+.font-bold,
+.font-semibold,
+.font-medium {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Override Tailwind text color utility classes inside Ghost comments */
+[data-testid="content-box"] .text-black,
+[data-testid="content-box"] .text-white,
+[data-testid="content-box"] .text-neutral-900,
+[data-testid="content-box"] .text-neutral-600,
+[data-testid="content-box"] .text-neutral-900\/50,
+[data-testid="content-box"] .dark\:text-white,
+[data-testid="content-box"] .dark\:text-white\/50,
+[data-testid="content-box"] [class*="text-"],
+[data-testid="content-box"] [class*="font-"],
+.ghost-display [class*="text-"],
+.ghost-display [class*="font-"] {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Strong Tailwind font family overrides for Ghost comments */
+.font-sans,
+.text-2xl,
+.text-lg,
+.text-md,
+.text-sm,
+[class*="text-"],
+[class*="font-"],
+.tracking-tight,
+.font-bold,
+.font-medium,
+.font-semibold,
+.leading-none,
+.leading-normal {
+  font-family: "Departure Mono", monospace !important;
+}
+
+/* Specific overrides for Ghost comment elements */
+[data-testid] *,
+[data-testid="title"] *,
+[data-testid="count"] *,
+[data-testid="cta-box"] *,
+[data-testid="signup-button"] *,
+[data-testid="signin-button"] *,
+[data-testid="comment-elements"] * {
+  font-family: "Departure Mono", monospace !important;
+}
+
+/* Additional specific class overrides */
+.mb-7,
+.flex,
+.w-full,
+.items-baseline,
+.justify-between,
+.text-\[2\.2rem\],
+.sm\:text-2xl,
+.sm\:text-lg,
+.text-center,
+.inline-block,
+.rounded,
+.px-5,
+.py-\[14px\],
+.rounded-md {
+  font-family: "Departure Mono", monospace !important;
+}
+
+/* Buttons / search / portal */
+button,
+button *,
+.gh-search,
+.gh-search *,
+.gh-burger,
+.gh-burger *,
+.gh-portal-triggerbtn-wrapper,
+.gh-portal-triggerbtn-wrapper *,
+.gh-button,
+.gh-button *,
+.button,
+.button *,
+.btn,
+.btn * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Button/input outlines */
+button,
+.gh-button,
+.button,
+.btn,
+input,
+textarea,
+select,
+.ghost-display [data-testid="signup-button"],
+.ghost-display [data-testid="signin-button"],
+[data-testid="signup-button"],
+[data-testid="signin-button"] {
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  border: 1px solid var(--terminal-green) !important;
+}
+
+/* Specifically fix Ghost comment buttons with inline styles */
+[data-testid="signin-button"],
+[data-testid="signin-button"] *,
+[data-testid="signup-button"],
+[data-testid="signup-button"] * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Social icons / SVGs */
+svg,
+svg *,
+.icon,
+.icon *,
+path,
+circle,
+g {
+  color: var(--terminal-green) !important;
+  fill: var(--terminal-green) !important;
+  stroke: var(--terminal-green) !important;
+  background-color: #000000 !important;
+}
+
+/* Footer/social sections */
+.gh-social,
+.gh-social *,
+.gh-footer-social,
+.gh-footer-social *,
+.gh-footer a,
+.gh-footer a *,
+.gh-footer svg,
+.gh-footer svg *,
+.gh-navigation svg,
+.gh-navigation svg * {
+  color: var(--terminal-green) !important;
+  fill: var(--terminal-green) !important;
+  stroke: var(--terminal-green) !important;
+}
+
+/* Footer subscribe form */
+.gh-form,
+.gh-form *,
+.gh-form-input,
+input.gh-form-input,
+#footer-email,
+[data-members-email],
+[data-members-error],
+.gh-button,
+.gh-button *,
+button.gh-button,
+button.gh-button *,
+button[type="submit"],
+button[type="submit"] * {
+  font-family: "Departure Mono", monospace !important;
+  color: var(--terminal-green) !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  border-color: var(--terminal-green) !important;
+  fill: var(--terminal-green) !important;
+  stroke: var(--terminal-green) !important;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder,
+.gh-form-input::placeholder,
+#footer-email::placeholder {
+  color: var(--terminal-green-dim) !important;
+  opacity: 1 !important;
+}
+
+/* Subscribe button border */
+.gh-button,
+button.gh-button,
+button[type="submit"] {
+  border: 1px solid var(--terminal-green) !important;
+  box-shadow: none !important;
+}
+
+/* Dividers / separators / horizontal rules */
+hr,
+.gh-divider,
+.gh-separator,
+.gh-footer-separator,
+.gh-footer-divider,
+[class*="divider"],
+[class*="Divider"],
+[class*="separator"],
+[class*="Separator"] {
+  border-color: var(--terminal-green) !important;
+  background-color: var(--terminal-green) !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Generic border color */
+*,
+*::before,
+*::after {
+  border-color: var(--terminal-green) !important;
+}
+
+/* Keep bordered containers black */
+[class*="border"],
+[class*="Border"] {
+  background-color: #000000 !important;
+}
+
+/* Divider-like pseudo elements */
+.gh-navigation::after,
+.gh-navigation::before,
+.gh-footer::before,
+.gh-footer::after,
+.gh-canvas::before,
+.gh-canvas::after,
+.gh-main::before,
+.gh-main::after,
+.article::before,
+.article::after {
+  background-color: var(--terminal-green) !important;
+  border-color: var(--terminal-green) !important;
+  color: var(--terminal-green) !important;
+}
+
+/* Dim secondary text slightly instead of gray */
+p,
+span,
+small,
+time,
+.post-card-excerpt,
+.article-excerpt,
+.gh-article-excerpt,
+.gh-card-excerpt,
+.ghost-display [data-testid="count"],
+[data-testid="count"] {
+  color: var(--terminal-green-dim) !important;
+}
+
+/* Keep important title/button/link/icon text bright green */
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
+a,
+a *,
+button,
+button *,
+svg,
+svg *,
+.gh-navigation-logo,
+.gh-navigation-logo *,
+.gh-footer-logo,
+.gh-footer-logo *,
+[data-testid="title"],
+[data-testid="title"] *,
+[data-testid="signup-button"],
+[data-testid="signup-button"] *,
+[data-testid="signin-button"],
+[data-testid="signin-button"] * {
+  color: var(--terminal-green) !important;
+}
+
+/* Optional terminal glow */
+body {
+  text-shadow: 0 0 4px rgba(0, 255, 102, 0.45);
+}
